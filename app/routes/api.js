@@ -74,5 +74,18 @@ module.exports = function (app, express) {
             }
         });
     });
+
+
+    //custom middleware for checking users like a police officer after user loginin
+    app.use(function(req , res , next){
+        var token = req.body.token || req.param('token') || req.headers['x-access-token'];
+        // check if token exists
+        if(token){
+            jsonWebToken.verify(token , secretKey , function(err , decoded){
+
+            });
+        }
+    });
+
     return api;
 }
